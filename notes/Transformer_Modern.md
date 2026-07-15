@@ -135,3 +135,31 @@ The GPT (Generative Pre-trained Transformer) model architecture is a "decoder-on
     - Feed-Forward: Refines the vector to represent "This is a question-initiating phrase."
   - Final Layer: Outputs high probability for "your" or "the" as the next word.
 
+## Encoder Decoder Models
+Encoder-decoder models are a fundamental architecture in modern deep learning. These models bring together an encoder and a decoder, enabling efficient processing of input data while generating meaningful output. So, how does it work?
+  - Start with the encoder, which takes the input and processes it to capture its contextual meaning. It transforms the data into a structured representation that the model can understand. This step is essential for retaining the core information before moving forward.
+  - Then comes the decoder, which uses that structured information to generate text that is natural and coherent. Unlike simple text generation models that produce output sequentially, encoder-decoder models maintain logical consistency by referencing the complete context provided by the encoder.
+Example models - BART, T5, PEGASUS
+
+## BART ( Bidirectional and Auto-Regressive Transformer)
+It is a hybrid model that integrates the strengths of both BERT and GPT. It employs a bidirectional encoding process, similar to BERT, where input text is processed in both directions for comprehensive contextual understanding. Unlike BERT’s traditional word masking, BART introduces span corruption, replacing continuous token spans with a single mask token, forcing the model to reconstruct entire phrases while maintaining semantic coherence.​
+
+On the decoding side, BART adopts autoregressive generation, akin to GPT, where tokens are generated one at a time. However, unlike GPT’s free-flowing text generation, BART ensures that the output remains structured and contextually relevant by conditioning the generated tokens on the encoded input. 
+
+- BART’s Denoising Process​
+
+BART employs a denoising autoencoder approach, where input data is deliberately corrupted before being passed through the model. This corruption process enhances its ability to reconstruct meaningful and coherent text, making it robust in handling noisy or incomplete inputs. Several noise-insertion techniques are used to distort the input data. Token masking replaces random words with a special [MASK] token, requiring the model to predict the missing information. Token deletion removes entire words from the sequence, forcing the model to infer missing content based on surrounding context. Text infilling, also known as span corruption, replaces entire spans of text with a single [MASK] token, compelling the model to reconstruct larger segments rather than individual words.​
+
+Once the corrupted input is processed, BART undergoes a denoising process, where the encoder extracts meaningful representations from the remaining text, while the decoder reconstructs the original sequence as accurately as possible. This training strategy enables BART to handle flexible and imperfect inputs, making it effective at dealing with noisy text, spelling errors, and improper formatting. By learning to recover meaning from disrupted inputs, BART improves its ability to generate accurate, context-aware, and semantically coherent text.​
+
+## T5 (Text-to-Text Transfer Transformer)
+ A multi-task generalist. It reframes every single NLP problem—whether it is translation, classification, or question-answering—into a uniform text-to-text format using English text prefixes (e.g., "translate English to German: ..."). It is pre-trained using Span Corruption, where the model learns by filling in missing multi-word blanks
+
+## PEGASUS (Pre-training with Extracted Gap-sentences for Abstractive Summarization)
+A specialized expert built exclusively for abstractive text summarization. It was designed to excel at reading long documents and writing short, cohesive summaries. Instead of masking random words, its unique pre-training task is Gap Sentence Generation (GSG): it completely removes critical, whole sentences from an article, forcing the model to reconstruct those entire sentences using the surrounding paragraph context
+
+## Multimodal models 
+These are designed to process multiple types of data moving beyond the traditional text based inputs. These models integrate different modalities such as text, image, audio, and video, allowing AI to understand and generate more contextually rich outputs. Instead of relying on a single data type, multimodal models combines multiple inputs to enhance their decision making and interpretation. To achieve this, separate architectures are used for different data types.
+  - ViLBERT – 2 separate models for text and videos​
+  - Show & Tell – CNN based model for images, LSTM for text captioning​
+  - GATO- generalist deep neural network capable of handling text, images, video, and robotic control within a single Transformer architecture. It tokenises all inputs into a shared format, treating different modalities as a sequence. 

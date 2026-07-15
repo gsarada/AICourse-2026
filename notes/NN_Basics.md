@@ -1,3 +1,6 @@
+## AI Landscape
+[AI](AI_Landscape.png)
+
 ## Introduction to Artificial Neural Networks
 
 - Intro: Neural Networks (NNs) are networks of neurons, as found in real brains. Artificial neurons are crude approximations of the neurons found in brains. They may be physical devices, or purely mathematical/software constructs.
