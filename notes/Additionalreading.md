@@ -5,7 +5,9 @@ https://platform.openai.com/docs/api-reference/introductionLinks to an external 
 https://platform.openai.com/docs/conceptsLinks to an external site.
 https://docs.gptr.dev/docs/examples/examples
 https://aws.amazon.com/blogs/machine-learning/llm-continuous-self-instruct-fine-tuning-framework-powered-by-a-compound-ai-system-on-amazon-sagemaker/
-
+https://cloud.google.com/use-cases/multimodal-ai?utm_source=chatgpt.com
+https://www.csail.mit.edu/news/mit-csail-researchers-discuss-frontiers-generative-ai?utm_source=chatgpt.com
+https://sloanreview.mit.edu/article/agentic-ai-security-essentials/
 
 https://github.com/u1i/simple-memory-mcp-server
 https://github.com/u1i/crewai-debate

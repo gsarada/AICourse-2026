@@ -46,3 +46,25 @@ A Deep Convolutional Neural Network (DCNN or CNN) is a specialized deep learning
 4. Architectural bottlenecks
   - Vanishing/Exploding gradients: As networks grow deeper, gradients can shrink exponentially during backpropagation, causing the early layers to stop learning entirely. While residual connections (ResNets) mitigate this, it remains an optimization constraint.
   - Black-box nature: DCNNs lack inherent explainability. They extract millions of abstract numerical features across hundreds of layers, making it incredibly difficult for engineers to audit why a network made a specific critical error in high-stakes fields like medicine or autonomous driving.
+
+## U-NET
+It is a specialized Convolutional Neural Network (CNN) architecture designed explicitly for fast, precise image-to-image mapping. Its unique layout allows it to output clean, high-resolution pixel maps using very small training datasets. It was the core denoising engine inside early Diffusion Models and Stable Diffusion.
+
+The network is physically shaped like the letter "U", split into two perfectly symmetrical halves: an Encoder (the contracting downward slope) and a Decoder (the expanding upward slope)
+  
+  ```
+    [ Input Image ]                                                 [ Output Pixel Mask ]
+      │                                                                 ▲
+      ▼                                                                 │
+   [ Down-Sampling Encoder ] ───► ( Skip Connections ) ───► [ Up-Sampling Decoder ]
+    (Extracts Abstract Meaning)                               (Reconstructs High-Res Spatial Detail)
+      │                                                                 ▲
+      └───────────────────────► [ Bottleneck ] ─────────────────────────┘
+  ```
+- The left side: The contracting encoder (What is in the image?)As an image flows down the left side, it passes through standard convolutional and max-pooling layers
+   - The Operation: The spatial resolution (width and height) is crushed in half at each step, while the channel depth expands 
+   - The Goal: To strip away fine, noisy background details and isolate the abstract, deep conceptual features. By the time the data hits the bottom bottleneck layer, the network knows exactly what objects are in the image, but it has completely lost track of where they are physically positioned down to the exact pixel.
+- The right side: The expanding decoder (Where is it located?)To create a clean image output, the network must scale those abstract numbers back up to the original full-sized resolution.
+   - The Operation: It uses transposed convolutions (up-sampling convolutions) to multiply the spatial grid width and height back out.
+   - The Goal: To reconstruct highly precise, sharp pixel-level details and boundaries from the compressed abstract data 
+- Skip connections: At every tier of the network, the raw, uncompressed high-resolution spatial features from the encoder are physically copied and pasted directly across to the matching tier of the decoder. This localized shortcut allows U-Net to output flawlessly sharp, pixel-perfect layouts without losing its grasp on fine high-frequency textures 
